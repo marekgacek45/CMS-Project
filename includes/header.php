@@ -13,3 +13,6 @@
 <body>
 
 <h1>header</h1>
+
+<a href="login.php"><button>Login</button></a>
+<!-- jeżeli jestem na stronie login musi to być niewidoczne -->
