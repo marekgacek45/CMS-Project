@@ -2,10 +2,24 @@
 
 class Article
 {
-    public $id ; 
-    public $title ; 
-    public $content ; 
-    public $published_at ; 
+    public $id;
+    public $title;
+    public $content;
+    public $published_at;
+    public $errors = [];
+
+    protected function validate()
+    {
+        if ($this->title === '') {
+            $this->errors[] = 'title is required';
+        }
+        if ($this->content === '') {
+            $this->errors[] = 'content is required';
+        }
+
+        return empty($this->errors);
+    }
+
 
     public static function getAll($conn)
     {
@@ -18,7 +32,7 @@ class Article
     }
 
     public function create($conn)
-    {
+    {if($this->validate()){
             $sql = "INSERT INTO article(title,content,published_at)
                 VALUES ( :title,:content,:published_at)";
 
@@ -30,11 +44,12 @@ class Article
             $stmt->bindValue(':published_at', $this->published_at, PDO::PARAM_STR);
 
 
-            if ($stmt->execute()){
+            if ($stmt->execute()) {
                 $this->id = $conn->lastInsertId();
                 return true;
-            }
-         }
+            }}else return false;
+        
+    }
 
 
 }
