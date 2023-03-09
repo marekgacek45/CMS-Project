@@ -3,17 +3,27 @@
 
 require('includes//header.php');
 require('classes/Database.php');
+require('classes/Article.php');
 
 $db = new Database();
 $conn = $db->getConn();
 
+$articles = Article::getAll($conn);
 
 
-    ?>
+?>
 
 <main>
 
-    <p>main page</p>
+
+<?php foreach($articles as $article) :?>
+
+<h2><?= htmlspecialchars($article["title"]); ?></h2>
+<p><?= htmlspecialchars($article["content"]); ?></p>
+<p><?= htmlspecialchars($article["published_at"]); ?></p>
+
+<?php endforeach ?>
+
 </main>
 
 
@@ -21,4 +31,4 @@ $conn = $db->getConn();
 
 require('includes/footer.php');
 
-    ?>
+?>
