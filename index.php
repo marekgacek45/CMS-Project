@@ -11,7 +11,7 @@ $articles = Article::getAll($conn);
 
 ?>
 
-<main>
+<main class="container">
 
     <a href="add_article.php"><button>Dodaj wpis</button></a>
 
