@@ -1,16 +1,20 @@
 <?php
 
-require('includes/header.php') ;
+require('includes/header.php');
+$conn = require('includes/database.php');
+;
 
 if ($_SERVER["REQUEST_METHOD"] === 'POST') {
 
-    if ($_POST['username'] === 'admin' && $_POST['password'] === 'admin') {
+    if (User::authenticate($conn,$_POST['username'],$_POST['password']))    {
 
 session_regenerate_id(true);
 
         $_SESSION['is_logged_in'] = true;
         
         $_SESSION['username'] = $_POST['username'];
+
+      
 
         header('Location:index.php');
         
