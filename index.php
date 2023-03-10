@@ -1,11 +1,8 @@
 <?php
 
-require('includes//header.php');
-require('classes/Database.php');
-require('classes/Article.php');
+require('includes/header.php');
 
-$db = new Database();
-$conn = $db->getConn();
+$conn = require('includes/database.php');
 
 $articles = Article::getAll($conn);
 
@@ -13,7 +10,10 @@ $articles = Article::getAll($conn);
 
 <main class="container">
 
-    <a href="add_article.php"><button>Dodaj wpis</button></a>
+
+
+    <a href="add-article.php"><button>Dodaj wpis</button></a>
+
 
     <?php foreach ($articles as $article): ?>
 

@@ -1,3 +1,5 @@
+
+
 <!DOCTYPE html>
 <html lang="pl">
 
@@ -13,12 +15,4 @@
 
 <body>
 
-    <nav class="navbar navbar-dark bg-dark">
-        <div class="container">
-
-            <a href="login.php"><button>Login</button></a>
-        </div>
-
-    </nav>
-
-    <!-- jeżeli jestem na stronie login musi to być niewidoczne -->
+<?php require ('components/navbar.php') ?>
