@@ -1,35 +1,39 @@
 <?php
 
-session_start();
+require('includes/init.php');
+
+require('includes/header.php');
+
+$conn = require('includes/database.php');
+;
 
 if ($_SERVER["REQUEST_METHOD"] === 'POST') {
 
-    if ($_POST['username'] === 'admin' && $_POST['password'] === 'admin') {
+    if (User::authenticate($conn, $_POST['username'], $_POST['password'])) {
 
-session_regenerate_id(true);
+        Auth::login();
 
-        $_SESSION['is_logged_in'] = true;
 
-        header('Location:index.php');
+        header('Location:/CMS%20Project/admin/index.php');
+
 
     } else {
-       echo "invalid";
-       
+        echo "invalid";
+
     }
 }
 
 ?>
 
 
+<div class="container">
 
-
-<?php require('includes/header.php') ?>
-
-<form  method="post">
-    <label for="username">username:</label><input type="text" name="username" id="username">
-    <label for="username">password:</label><input type="password" name="password" id="password">
-    <button type="submit">Login</button>
-</form>
+    <form method="post">
+        <label for="username">username:</label><input type="text" name="username" id="username">
+        <label for="username">password:</label><input type="password" name="password" id="password">
+        <button type="submit">Login</button>
+    </form>
+</div>
 
 
 <?php require('includes/footer.php') ?>
