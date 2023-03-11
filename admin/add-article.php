@@ -2,6 +2,8 @@
 
 require('includes/init.php');
 
+Auth::requireLogin();
+
 $article = new Article();
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {

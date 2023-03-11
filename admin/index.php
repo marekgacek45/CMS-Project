@@ -1,16 +1,23 @@
 <?php
 
-require('includes/init.php');
+require('../includes/init.php');
 
-require('includes/header.php');
+require('../includes/header.php');
 
-$conn = require('includes/database.php');
+$conn = require('../includes/database.php');
+
+Auth::requireLogin();
 
 $articles = Article::getAll($conn);
 
 ?>
 
 <main class="container">
+
+
+
+    <a href="add-article.php"><button>Dodaj wpis</button></a>
+
 
 
     <?php foreach ($articles as $article): ?>
@@ -31,6 +38,6 @@ $articles = Article::getAll($conn);
 
 <?php
 
-require('includes/footer.php');
+require('../includes/footer.php');
 
 ?>

@@ -1,5 +1,3 @@
-
-
 <!DOCTYPE html>
 <html lang="pl">
 
@@ -15,4 +13,20 @@
 
 <body>
 
-<?php require ('components/navbar.php') ?>
+    <nav class="navbar navbar-dark bg-primary">
+        <div class="container">
+
+            <div>
+                <?php if (Auth::isLoggedIn()): ?>
+                    <a href="/CMS%20Project/logout.php"><button>Logout</button></a>
+                    <a href="/CMS%20Project/admin/index.php"><button>Admin</button></a>
+                    <a href="/CMS%20Project/index.php"><button>Home</button></a>
+                </div>
+
+
+            <?php else: ?>
+                <a href="login.php"><button>Login</button></a>
+            <?php endif ?>
+        </div>
+
+    </nav>
