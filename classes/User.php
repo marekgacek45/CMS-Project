@@ -9,7 +9,7 @@ class User
     public static function authenticate($conn, $username, $password)
     {
 
-        $sql = "SELECT * FROM user WHERE username=:username";
+        $sql = "SELECT * FROM admin WHERE username=:username";
 
         $stmt = $conn->prepare($sql);
 
@@ -21,12 +21,20 @@ class User
 
         $user = $stmt->fetch();
 
-        if ($user) {
-            if ($password == $user->password)
-                return true;
+        // if ($user) {
+        //     if ($password == $user->password)
+        //         return true;
 
-        }
+        // }
+        $stmt->execute();
+
+        if($user = $stmt->fetch()){
+          return password_verify($password, $user->password);
+        };
+       
     }
+
+    
 
 }
 

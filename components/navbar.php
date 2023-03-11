@@ -1,7 +1,5 @@
 <?php 
 
-// require('classes/Auth.php');
-// session_start();
 
 require('includes/init.php')
 ?>

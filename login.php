@@ -1,6 +1,7 @@
 <?php
 
 require('includes/header.php');
+
 $conn = require('includes/database.php');
 ;
 
@@ -15,12 +16,7 @@ session_regenerate_id(true);
         $_SESSION['username'] = $_POST['username'];
 
       
-
         header('Location:index.php');
-        
-         
-
-
         
 
     } else {
