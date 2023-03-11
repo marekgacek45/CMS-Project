@@ -32,6 +32,7 @@ $articles = Article::getAll($conn);
             <?= htmlspecialchars($article["published_at"]); ?>
         </p>
 
+        <a href="article.php?id=<?= $article['id'] ?>">czytaj</a>
     <?php endforeach ?>
 
 </main>

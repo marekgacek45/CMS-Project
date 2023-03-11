@@ -48,8 +48,6 @@ if($stmt->execute()){
 
 }
 
-
-
     public function create($conn)
     {if($this->validate()){
             $sql = "INSERT INTO article(title,content,published_at)
@@ -69,6 +67,18 @@ if($stmt->execute()){
             }}else return false;
         
     }
+
+public function delete($conn){
+
+    $sql = 'DELETE from article WHERE id=:id';
+
+    $stmt=$conn->prepare($sql);
+
+    $stmt->bindValue(':id', $this->id, PDO::PARAM_INT);
+
+    return $stmt->execute();
+}
+
 
 
 }
