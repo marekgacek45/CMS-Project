@@ -1,6 +1,6 @@
 <?php
 
-require('includes/init.php');
+require('../includes/init.php');
 
 Auth::requireLogin();
 
@@ -8,7 +8,7 @@ $article = new Article();
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
-    $conn = require('includes/database.php');
+    $conn = require('../includes/database.php');
 
     $article->title = $_POST['title'];
     $article->content = $_POST['content'];
@@ -23,7 +23,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
 
 <?php
-require('includes/header.php')
+require('../includes/header.php')
     ?>
 
 <?php if (!empty($article->errors)): ?>
@@ -37,13 +37,15 @@ require('includes/header.php')
 
 <?php endif ?>
 
-<form method="post">
-    <label for="title">Tytuł:</label><input type="text" name="title" id="title" value="<?= $article->title; ?>">
-    <label for="content">Wpisz treść:</label><textarea name="content" id="content" cols="30" rows="10"
-        value=<?= $article->content; ?>></textarea>
-    <label for="date">Data:</label><input type="date" name="date" id="date">
-    <button type="submit">Dodaj</button>
-</form>
+<h2>Dodaj nowy artykuł:</h2>
+
+<?php require('includes/article-form.php') ?>
 
 
 <?php require('includes/footer.php') ?>
+
+
+<!--
+1.Poprawić żeby wyskakiwał błąd jeżeli tytuł już występuje
+
+ -->

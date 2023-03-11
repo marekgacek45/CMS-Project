@@ -31,25 +31,27 @@ class Article
         return $results->fetchAll(PDO::FETCH_ASSOC);
     }
 
-public static function getSingleArticle($conn,$id,$columns="*"){
+    public static function getSingleArticle($conn, $id, $columns = "*")
+    {
 
-    $sql = "SELECT $columns FROM article WHERE id = :id";
+        $sql = "SELECT $columns FROM article WHERE id = :id";
 
-$stmt = $conn->prepare($sql);
+        $stmt = $conn->prepare($sql);
 
-$stmt->bindValue(':id', $id, PDO::PARAM_INT);
+        $stmt->bindValue(':id', $id, PDO::PARAM_INT);
 
-$stmt->setFetchMode(PDO::FETCH_CLASS,'Article');
+        $stmt->setFetchMode(PDO::FETCH_CLASS, 'Article');
 
-if($stmt->execute()){
-    return $stmt->fetch();
-}
+        if ($stmt->execute()) {
+            return $stmt->fetch();
+        }
 
 
-}
+    }
 
     public function create($conn)
-    {if($this->validate()){
+    {
+        if ($this->validate()) {
             $sql = "INSERT INTO article(title,content,published_at)
                 VALUES ( :title,:content,:published_at)";
 
@@ -64,20 +66,42 @@ if($stmt->execute()){
             if ($stmt->execute()) {
                 $this->id = $conn->lastInsertId();
                 return true;
-            }}else return false;
-        
+            }
+        } else {
+            return false;
+        }
     }
 
-public function delete($conn){
+    public function update($conn)
+    {
+        if ($this->validate()) {
+            $sql = "UPDATE article SET title =:title, content=:content, published_at=:published_at
+            WHERE id = :id";
 
-    $sql = 'DELETE from article WHERE id=:id';
 
-    $stmt=$conn->prepare($sql);
+            $stmt = $conn->prepare($sql);
 
-    $stmt->bindValue(':id', $this->id, PDO::PARAM_INT);
 
-    return $stmt->execute();
-}
+            $stmt->bindValue(':id', $this->id, PDO::PARAM_INT);
+            $stmt->bindValue(':title', $this->title, PDO::PARAM_STR);
+            $stmt->bindValue(':content', $this->content, PDO::PARAM_STR);
+            $stmt->bindValue(':published_at', $this->published_at, PDO::PARAM_STR);
+
+
+            if ($stmt->execute()) {
+                $this->id = $conn->lastInsertId();
+                return true;
+            }
+        } else {
+            return false;
+        }
+
+    }
+
+
+
+
+
 
 
 
