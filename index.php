@@ -6,7 +6,7 @@ require('includes/header.php');
 
 $conn = require('includes/database.php');
 
-$articles = Article::getAll($conn);
+$articles = Article::getPage($conn,5,0);
 
 ?>
 
