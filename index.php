@@ -6,7 +6,9 @@ require('includes/header.php');
 
 $conn = require('includes/database.php');
 
-$articles = Article::getPage($conn,5,0);
+$paginator = new Paginator(1,5);
+
+$articles = Article::getPage($conn,$paginator->limit,$paginator->offset);
 
 ?>
 
