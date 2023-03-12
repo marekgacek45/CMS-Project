@@ -61,6 +61,10 @@ public static function getPage($conn,$limit,$offset){
 
 }
 
+public static function getTotalPages($conn){
+    return $conn->query('SELECT COUNT(*) FROM article')->fetchColumn();
+}
+
 
     public function create($conn)
     {
