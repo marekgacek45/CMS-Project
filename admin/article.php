@@ -8,7 +8,6 @@ $conn = require('../includes/database.php');
 
 $id = $_GET['id'];
 
-var_dump($_GET);
 
 $article = Article::getSingleArticle($conn, $id);
 
@@ -25,8 +24,8 @@ $article = Article::getSingleArticle($conn, $id);
         <?= $article->content ?>
     </p>
     <div>
-        <a href="edit-article.php?id=<?= $id ?>"><button>edit</button></a>
-        <button>delete</button>
+        <a href="edit-article.php?id=<?= $id ?>"><button>edytuj</button></a>
+        <a href="delete-article.php?id=<?= $id ?>"><button>usuń</button></a>
     </div>
 
 

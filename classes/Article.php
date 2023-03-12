@@ -90,23 +90,29 @@ class Article
 
             if ($stmt->execute()) {
                 $this->id = $conn->lastInsertId();
+
+
                 return true;
             }
         } else {
             return false;
         }
 
+
+
+    }
+    public function delete($conn)
+    {
+$sql = "DELETE FROM article WHERE id = :id";
+
+$stmt = $conn->prepare($sql);
+
+$stmt->bindValue(':id',$this->id,PDO::PARAM_INT);
+
+return $stmt->execute();
+
     }
 
-
-
-
-
-
-
-
 }
-
-
 
 ?>

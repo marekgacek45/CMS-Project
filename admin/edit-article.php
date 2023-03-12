@@ -4,12 +4,13 @@ require('../includes/init.php');
 
 $conn = require('../includes/database.php');
 
-Auth::isLoggedIn();
+// Auth::isLoggedIn();
+Auth::requireLogin();
 
+$id= $_GET['id'];
 
-
-if (isset($_GET['id'])) {
-    $article = Article::getSingleArticle($conn, $_GET['id']);
+if (isset($id)) {
+    $article = Article::getSingleArticle($conn, $id);
 
     if (!$article) {
         die('nie ma takiego artykułu');
@@ -27,7 +28,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // $article->published_at = $_POST['published_at'];
 
     if ($article->update($conn)) {
-        // header('Location:index.php');
+        header("Location:index.php");
     }
 }
 
@@ -43,6 +44,8 @@ require('../includes/header.php')
 <h2>Edytuj treść artykułu:</h2>
 
 <?php require('includes/article-form.php') ?>
+
+
 
 
 <?php require('../includes/footer.php') ?>

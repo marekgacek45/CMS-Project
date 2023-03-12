@@ -26,23 +26,14 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 require('../includes/header.php')
     ?>
 
-<?php if (!empty($article->errors)): ?>
 
-    <?php foreach ($article->errors as $error): ?>
-        <p>
-            <?= $error; ?>
-        </p>
-    <?php endforeach ?>
-
-
-<?php endif ?>
 
 <h2>Dodaj nowy artykuł:</h2>
 
 <?php require('includes/article-form.php') ?>
 
 
-<?php require('includes/footer.php') ?>
+<?php require('../includes/footer.php') ?>
 
 
 <!--
