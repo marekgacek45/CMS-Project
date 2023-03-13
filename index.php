@@ -8,7 +8,7 @@ $conn = require('includes/database.php');
 
 $totalArticle = Article::getTotalPages($conn);
 
-$paginator = new Paginator($_GET['page'] ?? 1, 5,$totalArticle);
+$paginator = new Paginator($_GET['page'] ?? 1, 5, $totalArticle);
 
 $articles = Article::getPage($conn, $paginator->limit, $paginator->offset);
 
@@ -32,26 +32,11 @@ $articles = Article::getPage($conn, $paginator->limit, $paginator->offset);
         <a href="article.php?id=<?= $article['id'] ?>">czytaj</a>
     <?php endforeach ?>
 
-    <ul>
-        <li>
-            <?php if ($paginator->previous): ?>
-                <a href="?page=<?= $paginator->previous ?>">previous</a>
-            <?php else: ?>
-                previous
-            <?php endif ?>
-        </li>
-        <li>
-            <?php if ($paginator->next): ?>
-                <a href="?page=<?= $paginator->next ?>">next</a>
-            <?php else: ?>
-                next
-            <?php endif ?>
-        </li>
-
-
-    </ul>
 
 </main>
+
+<?php require('includes/pagination.php') ?>
+
 
 <?php
 

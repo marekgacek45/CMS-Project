@@ -8,7 +8,11 @@ $conn = require('../includes/database.php');
 
 Auth::requireLogin();
 
-$articles = Article::getAll($conn);
+$totalArticle = Article::getTotalPages($conn);
+
+$paginator = new Paginator($_GET['page'] ?? 1, 10, $totalArticle);
+
+$articles = Article::getPage($conn, $paginator->limit, $paginator->offset);
 
 ?>
 
@@ -36,6 +40,8 @@ $articles = Article::getAll($conn);
     <?php endforeach ?>
 
 </main>
+
+<?php require('../includes/pagination.php') ?>
 
 <?php
 
